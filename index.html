@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MyBook – Social Network</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    body {
+      background-color: #f0f2f5;
+    }
+
+    /* Header */
+    header {
+      background-color: #1877f2;
+      color: white;
+      padding: 12px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+    }
+
+    header h1 {
+      font-size: 26px;
+    }
+
+    header input {
+      width: 300px;
+      padding: 8px;
+      border-radius: 20px;
+      border: none;
+      outline: none;
+    }
+
+    /* Layout */
+    .container {
+      display: flex;
+      margin-top: 20px;
+    }
+
+    /* Sidebar */
+    .sidebar {
+      width: 20%;
+      padding: 15px;
+    }
+
+    .sidebar div {
+      background: white;
+      padding: 10px;
+      margin-bottom: 10px;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    /* Feed */
+    .feed {
+      width: 60%;
+      padding: 15px;
+    }
+
+    .post-box {
+      background: white;
+      padding: 15px;
+      border-radius: 8px;
+      margin-bottom: 15px;
+    }
+
+    .post-box textarea {
+      width: 100%;
+      height: 80px;
+      padding: 10px;
+      resize: none;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+    }
+
+    .post-box button {
+      margin-top: 10px;
+      padding: 8px 15px;
+      background-color: #1877f2;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    .post {
+      background: white;
+      padding: 15px;
+      border-radius: 8px;
+      margin-bottom: 15px;
+    }
+
+    .post h3 {
+      margin-bottom: 8px;
+    }
+
+    .post-actions {
+      margin-top: 10px;
+      display: flex;
+      gap: 10px;
+    }
+
+    .post-actions button {
+      padding: 6px 12px;
+      border: none;
+      background: #e4e6eb;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    /* Right Panel */
+    .right-panel {
+      width: 20%;
+      padding: 15px;
+    }
+
+    .right-panel div {
+      background: white;
+      padding: 10px;
+      margin-bottom: 10px;
+      border-radius: 8px;
+    }
+
+    @media (max-width: 900px) {
+      .sidebar, .right-panel {
+        display: none;
+      }
+      .feed {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <h1>MyBook</h1>
+    <input type="text" placeholder="Search MyBook" />
+  </header>
+
+  <!-- Main Layout -->
+  <div class="container">
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <div>👤 Profile</div>
+      <div>👥 Friends</div>
+      <div>📸 Photos</div>
+      <div>⚙️ Settings</div>
+    </div>
+
+    <!-- Feed -->
+    <div class="feed">
+      <div class="post-box">
+        <textarea id="postText" placeholder="What's on your mind?"></textarea>
+        <button onclick="addPost()">Post</button>
+      </div>
+
+      <div id="posts"></div>
+    </div>
+
+    <!-- Right Panel -->
+    <div class="right-panel">
+      <div>Online Friends</div>
+      <div>Sponsored</div>
+    </div>
+
+  </div>
+
+  <script>
+    function addPost() {
+      const text = document.getElementById("postText").value;
+      if (text.trim() === "") return;
+
+      const postDiv = document.createElement("div");
+      postDiv.className = "post";
+      postDiv.innerHTML = `
+        <h3>Rajdeep</h3>
+        <p>${text}</p>
+        <div class="post-actions">
+          <button onclick="likePost(this)">👍 Like</button>
+          <button>💬 Comment</button>
+          <button>↗️ Share</button>
+        </div>
+      `;
+
+      document.getElementById("posts").prepend(postDiv);
+      document.getElementById("postText").value = "";
+    }
+
+    function likePost(btn) {
+      if (btn.innerText.includes("Like")) {
+        btn.innerText = "❤️ Liked";
+      } else {
+        btn.innerText = "👍 Like";
+      }
+    }
+  </script>
+
+</body>
+</html>
